@@ -1,0 +1,20 @@
+name: release
+on:
+  push:
+    tags:
+      - "v*"
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: github release
+        run: |
+          ver="${GITHUB_REF_NAME#v}"
+          notes=$(awk -v v="$ver" 'index($0,"## ["v"]")==1{p=1;next} /^## /{if(p)p=0} p' CHANGELOG.md)
+          gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes "${notes:-See CHANGELOG.md}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
