@@ -41,7 +41,7 @@ final class ResolveTest extends TestCase
 
         $request = $transport->lastRequest();
         self::assertSame('POST', $request->method);
-        self::assertSame('https://linkskipper.app/v1/resolve', $request->url);
+        self::assertSame('https://api.linkskipper.app/v1/resolve', $request->url);
         self::assertSame('Bearer sk_test', $request->headers['Authorization']);
         self::assertSame('{"url":"https://exe.io/abc"}', $request->body);
     }
@@ -87,7 +87,7 @@ final class ResolveTest extends TestCase
 
         $client->resolve('https://exe.io/abc');
 
-        self::assertSame('https://linkskipper.app/v1/resolve', $transport->lastRequest()->url);
+        self::assertSame('https://api.linkskipper.app/v1/resolve', $transport->lastRequest()->url);
     }
 
     public function testMapsAccountAndProviders(): void

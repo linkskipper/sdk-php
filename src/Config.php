@@ -15,8 +15,8 @@ use LinkSkipper\Http\Transport;
 
 final class Config
 {
-    public const DEFAULT_BASE_URL = 'https://linkskipper.app';
-    public const VERSION = '0.1.0';
+    public const DEFAULT_BASE_URL = 'https://api.linkskipper.app';
+    public const VERSION = '0.2.1';
 
     public readonly string $baseUrl;
     public readonly int $timeoutMs;

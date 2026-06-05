@@ -67,7 +67,7 @@ final class ResolveAndWaitTest extends TestCase
         self::assertFalse($link->cached);
         self::assertSame(3, $transport->callCount());
         self::assertSame('GET', $transport->requests[1]->method);
-        self::assertSame('https://linkskipper.app/v1/jobs/' . self::JOB_ID, $transport->requests[1]->url);
+        self::assertSame('https://api.linkskipper.app/v1/jobs/' . self::JOB_ID, $transport->requests[1]->url);
     }
 
     public function testThrowsJobFailedExceptionWhenJobFails(): void

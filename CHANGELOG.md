@@ -6,6 +6,11 @@ The PHP and TypeScript SDKs are released in lockstep (same version = same featur
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-06-05
+### Changed
+- Default base URL is now `https://api.linkskipper.app` (the dedicated developer API domain). Pass
+  `baseUrl` to override.
+
 ## [0.2.0] - 2026-06-05
 ### Added
 - `Webhook::verify` signature-verification helper: parses `X-LinkSkipper-Signature`, compares the
