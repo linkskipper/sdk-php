@@ -145,6 +145,30 @@ try {
 }
 ```
 
+## Webhooks
+
+Pass `webhook_url` on a resolve and Link Skipper POSTs the result to your endpoint, signed with `X-LinkSkipper-Signature: t=<unixSeconds>,v1=<hmacSha256>`. Verify every delivery against your key's webhook secret with `Webhook::verify`, which compares the HMAC with `hash_equals`, enforces a freshness window (default 300s), and returns a typed `WebhookEvent`. Pass the **raw** request body string.
+
+```php
+use LinkSkipper\Webhook;
+use LinkSkipper\Enum\WebhookEventName;
+use LinkSkipper\Exception\WebhookVerificationException;
+
+$payload = file_get_contents('php://input');
+$signature = $_SERVER['HTTP_X_LINKSKIPPER_SIGNATURE'] ?? '';
+
+try {
+    $event = Webhook::verify($payload, $signature, getenv('LINKSKIPPER_WEBHOOK_SECRET'));
+
+    if ($event->event === WebhookEventName::ResolveDone) {
+        printf("Job %s -> %s\n", $event->jobId, $event->targetUrl);
+    }
+    http_response_code(204);
+} catch (WebhookVerificationException $exception) {
+    http_response_code(400);
+}
+```
+
 ## Retries
 
 Network errors, `5xx`, and `429` are retried with bounded exponential backoff. A `Retry-After` header is always honored. Other `4xx` responses are never retried.
