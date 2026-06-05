@@ -1,0 +1,53 @@
+{
+    "name": "linkskipper/sdk",
+    "description": "Official PHP client for the Link Skipper link-resolving API.",
+    "type": "library",
+    "keywords": [
+        "linkskipper",
+        "link-resolver",
+        "url-shortener",
+        "api-client",
+        "sdk"
+    ],
+    "homepage": "https://linkskipper.app",
+    "support": {
+        "issues": "https://github.com/linkskipper/sdk-php/issues",
+        "source": "https://github.com/linkskipper/sdk-php"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Link Skipper",
+            "homepage": "https://linkskipper.app"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "suggest": {
+        "psr/http-client": "Pass any PSR-18 client to replace the bundled curl transport."
+    },
+    "autoload": {
+        "psr-4": {
+            "LinkSkipper\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LinkSkipper\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
